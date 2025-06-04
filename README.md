@@ -1,4 +1,4 @@
-# React Express Movie App
+# KZCinema
 
 ## Описание проекта
 
@@ -63,8 +63,8 @@ project/
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <url-репозитория>
-   cd <название-репозитория>
+   git clone https://github.com/KabylBeken/KZCinema.git
+   cd KZCinema
    ```
 
 2. Запустите все сервисы с помощью Docker Compose:
@@ -219,4 +219,4 @@ GET /cache-stats?secret=admin123
 ```
 POST /clear-cache?secret=admin123
 ```
-С опциональным параметром в теле запроса `{pattern: '/movies'}` для очистки определенных маршрутов. 
+С опциональным параметром в теле запроса `{pattern: '/movies'}` для очистки определенных маршрутов.
