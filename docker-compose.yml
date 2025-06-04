@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  # MongoDB сервис
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mern-network
+    ports:
+      - "27017:27017"
+
+  # Backend сервис 1
+  backend1:
+    build:
+      context: ./server-express
+      dockerfile: Dockerfile
+    container_name: backend1
+    restart: always
+    expose:
+      - "5001"
+    depends_on:
+      - mongo
+    networks:
+      - mern-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/moviesdb
+      - PORT=5001
+      - NODE_ENV=development
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Backend сервис 2
+  backend2:
+    build:
+      context: ./server-express
+      dockerfile: Dockerfile
+    container_name: backend2
+    restart: always
+    expose:
+      - "5001"
+    depends_on:
+      - mongo
+    networks:
+      - mern-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/moviesdb
+      - PORT=5001
+      - NODE_ENV=development
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Балансировщик нагрузки - Nginx
+  load-balancer:
+    image: nginx:latest
+    container_name: load-balancer
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "5050:80"
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - mern-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Frontend сервис
+  frontend:
+    build:
+      context: ./react-express-movie
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:3001" # 3000 на хосте, 3001 внутри контейнера
+      - "3001:3001" # Также экспортируем 3001 на хосте, чтобы приложение было доступно на обоих портах
+    depends_on:
+      - load-balancer
+    networks:
+      - mern-network
+    environment:
+      - REACT_APP_API_URL=http://localhost:5050
+      - PORT=3001
+
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local 

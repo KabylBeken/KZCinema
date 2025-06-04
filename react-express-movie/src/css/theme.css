@@ -1,0 +1,154 @@
+/* Файл стилей для светлой и темной темы */
+
+/* Переменные светлой темы */
+.light-theme {
+    --background-color: #f0f2f5;
+    --text-color: #212529;
+    --navbar-bg: #343a40;
+    --navbar-text: #fff;
+    --card-bg: #ffffff;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --primary-color: #3a86ff;
+    --secondary-color: #6c5ce7;
+    --accent-color: #a29bfe;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --footer-bg: #343a40;
+    --footer-text: #f8f9fa;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --input-text: #212529;
+    --header-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    --neo-bg: #f0f2f5;
+    --neo-shadow-dark: #ccced0;
+    --neo-shadow-light: #ffffff;
+}
+
+/* Переменные темной темы */
+.dark-theme {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --navbar-bg: #1e1e1e;
+    --navbar-text: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    --primary-color: #4f9bff;
+    --secondary-color: #7d6df0;
+    --accent-color: #b6adf3;
+    --success-color: #41d886;
+    --warning-color: #f6ac33;
+    --danger-color: #e7654e;
+    --footer-bg: #1a1a1a;
+    --footer-text: #e0e0e0;
+    --input-bg: #2d2d2d;
+    --input-border: #444444;
+    --input-text: #e0e0e0;
+    --header-gradient: linear-gradient(135deg, #7d6df0 0%, #b6adf3 100%);
+    --neo-bg: #1e1e1e;
+    --neo-shadow-dark: #151515;
+    --neo-shadow-light: #252525;
+}
+
+/* Применение переменных к стилям */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Стили навигационного меню */
+nav.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+nav.navbar .nav-link, 
+nav.navbar .navbar-brand {
+    color: var(--navbar-text) !important;
+}
+
+/* Стили карточек */
+.card {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+.card:hover {
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card-title {
+    color: var(--primary-color);
+}
+
+/* Стили текста */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+/* Стили кнопок */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+/* Стили неоморфизма с учетом темы */
+.neomorphic-card {
+    background-color: var(--neo-bg);
+    box-shadow: 
+        20px 20px 60px var(--neo-shadow-dark),
+        -20px -20px 60px var(--neo-shadow-light);
+}
+
+.neomorphic-header {
+    background: var(--header-gradient);
+}
+
+/* Стили для полей ввода */
+input, select, textarea {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+}
+
+/* Стили для футера */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+}
+
+/* Иконка переключения темы */
+.theme-toggle-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+    color: var(--navbar-text);
+}
+
+.theme-toggle-icon:hover {
+    transform: rotate(45deg);
+}
+
+/* Анимация при переключении темы */
+.theme-transition {
+    transition: background-color 0.5s ease, 
+                color 0.5s ease, 
+                box-shadow 0.5s ease;
+} 
